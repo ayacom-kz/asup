@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Планшет · кликабельный прототип</title>
+<script src="./_runtime/react.js"></script>
+<script src="./_runtime/react-dom.js"></script>
+<script src="./_runtime/support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#006f99}a:hover{color:#004d6b}
+</style>
+</helmet>
+<div style="width:1280px;height:1020px;overflow:hidden;background:#dfe8f1;color:#131c2e;font-family:Inter,'Segoe UI',sans-serif"><div style="width:1280px;height:800px;box-sizing:border-box;padding:12px;display:flex;flex-direction:column;gap:10px;background:#eef7fc"><div style="display:flex;align-items:center;gap:10px;height:56px"><img src="./assets/64b1086f4be1513fbcf429694ecd6117.svg" alt="ЭмбаМунайГаз" style="height:44px;margin-right:auto"><span style="font-size:28px;font-weight:700;padding:0 14px">{{ clock }}</span><button type="button" onClick="{{ openManual }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;height:56px">Ручная операция</button><div style="height:56px;box-sizing:border-box;display:flex;align-items:center;padding:0 14px;border-radius:11px;border:1px solid #cfdae8;background:{{ linkBg }};font-size:13px;font-weight:600">{{ linkText }}</div><div role="status" style="height:56px;box-sizing:border-box;display:flex;align-items:center;width:250px;padding:0 14px;border-radius:11px;border:1px solid #cfdae8;background:#ffffff;font-size:13px;font-weight:600">{{ syncText }}</div></div><div role="alert" style="min-height:20px;font-size:14px;font-weight:600;color:#8f2a22">{{ banner }}</div><sc-if value="{{ onOps }}" hint-placeholder-val="{{ true }}"><div style="flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 340px;grid-template-rows:minmax(0,1fr);gap:10px"><div style="display:flex;flex-direction:column;min-height:0;overflow:hidden;background:#ffffff;border:1px solid #e1e9f2;border-radius:13px"><div style="display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid #e6edf4"><span style="width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#ffffff;flex-shrink:0;background:#007fb0">Т1</span><div style="display:flex;flex-direction:column;gap:2px;min-width:0"><h2 style="margin:0;font-size:16px;font-weight:650;line-height:1.25">Основное питание</h2><span style="font-size:12px;color:#566a8b;line-height:1.45">Определяется автоматически</span></div><div style="margin-left:auto"></div></div><div style="margin:12px 14px 0;padding:12px 14px;border-radius:11px;background:{{ slotBg }};font-size:16px;font-weight:600">{{ slotText }}</div><div style="flex:1;display:flex;align-items:center;justify-content:center;padding:12px 16px"><sc-if value="{{ a.idle }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center"><svg aria-hidden="true" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#007fb0" stroke-width="1.5" stroke-linecap="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M4 16v2a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v2M16 20h2a2 2 0 0 0 2-2v-2M9 10h.01M15 10h.01M9.5 15a3.5 3.5 0 0 0 5 0"></path></svg><h3 style="margin:0;font-size:22px">{{ a.title }}</h3><span style="font-size:15px;color:#566a8b">{{ a.text }}</span></div></sc-if>
+<sc-if value="{{ a.pending }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:14px;align-items:center"><img src="{{ a.photo }}" alt="" style="width:184px;height:184px;border-radius:22px;object-fit:cover"><h3 role="status" style="margin:0;font-size:22px">Распознавание</h3></div></sc-if>
+<sc-if value="{{ a.done }}" hint-placeholder-val="{{ false }}"><div role="status" style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center"><sc-if value="{{ a.known }}" hint-placeholder-val="{{ true }}"><img src="{{ a.photo }}" alt="" style="width:184px;height:184px;border-radius:22px;object-fit:cover;border:5px solid {{ a.ring }}"></sc-if><sc-if value="{{ a.unknown }}" hint-placeholder-val="{{ false }}"><div style="width:184px;height:184px;box-sizing:border-box;border-radius:22px;border:5px solid {{ a.ring }};display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#745008" stroke-width="1.5" stroke-linecap="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M4 16v2a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v2M16 20h2a2 2 0 0 0 2-2v-2M9 10h.01M15 10h.01M9.5 15a3.5 3.5 0 0 0 5 0"></path></svg></div></sc-if><strong style="font-size:18px">{{ a.name }}</strong><h3 style="margin:0;font-size:22px">{{ a.title }}</h3><span style="padding:10px 14px;border-radius:10px;background:{{ a.bg }};font-size:13px;line-height:1.45">{{ a.text }}</span><span style="font-size:12px;color:#566a8b">Вернётся в ожидание через 8 секунд</span></div></sc-if></div></div><div style="display:flex;flex-direction:column;min-height:0;overflow:hidden;background:#ffffff;border:1px solid #e1e9f2;border-radius:13px"><div style="display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid #e6edf4"><span style="width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#ffffff;flex-shrink:0;background:#1d3a5c">Т2</span><div style="display:flex;flex-direction:column;gap:2px;min-width:0"><h2 style="margin:0;font-size:16px;font-weight:650;line-height:1.25">Дополнительное</h2><span style="font-size:12px;color:#566a8b;line-height:1.45">Позицию выбирает оператор</span></div><div style="margin-left:auto"></div></div><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px 14px 0"><sc-for list="{{ extras }}" as="x" hint-placeholder-count="3"><button type="button" onClick="{{ x.pick }}" aria-pressed="{{ x.on }}" style="min-height:60px;padding:6px;border-radius:10px;border:1px solid #cfdae8;background:{{ x.bg }};color:{{ x.fg }};font:600 13px Inter,sans-serif">{{ x.label }}</button></sc-for></div><div style="flex:1;display:flex;align-items:center;justify-content:center;padding:12px 16px"><sc-if value="{{ b.idle }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center"><svg aria-hidden="true" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#007fb0" stroke-width="1.5" stroke-linecap="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M4 16v2a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v2M16 20h2a2 2 0 0 0 2-2v-2M9 10h.01M15 10h.01M9.5 15a3.5 3.5 0 0 0 5 0"></path></svg><h3 style="margin:0;font-size:22px">{{ b.title }}</h3><span style="font-size:15px;color:#566a8b">{{ b.text }}</span></div></sc-if>
+<sc-if value="{{ b.pending }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:14px;align-items:center"><img src="{{ b.photo }}" alt="" style="width:184px;height:184px;border-radius:22px;object-fit:cover"><h3 role="status" style="margin:0;font-size:22px">Распознавание</h3></div></sc-if>
+<sc-if value="{{ b.done }}" hint-placeholder-val="{{ false }}"><div role="status" style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center"><sc-if value="{{ b.known }}" hint-placeholder-val="{{ true }}"><img src="{{ b.photo }}" alt="" style="width:184px;height:184px;border-radius:22px;object-fit:cover;border:5px solid {{ b.ring }}"></sc-if><sc-if value="{{ b.unknown }}" hint-placeholder-val="{{ false }}"><div style="width:184px;height:184px;box-sizing:border-box;border-radius:22px;border:5px solid {{ b.ring }};display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#745008" stroke-width="1.5" stroke-linecap="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M4 16v2a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v2M16 20h2a2 2 0 0 0 2-2v-2M9 10h.01M15 10h.01M9.5 15a3.5 3.5 0 0 0 5 0"></path></svg></div></sc-if><strong style="font-size:18px">{{ b.name }}</strong><h3 style="margin:0;font-size:22px">{{ b.title }}</h3><span style="padding:10px 14px;border-radius:10px;background:{{ b.bg }};font-size:13px;line-height:1.45">{{ b.text }}</span><span style="font-size:12px;color:#566a8b">Вернётся в ожидание через 8 секунд</span></div></sc-if></div></div><aside aria-label="Локальный журнал" style="display:flex;flex-direction:column;min-height:0;overflow:hidden;background:#ffffff;border:1px solid #e1e9f2;border-radius:13px"><div style="display:flex;flex-direction:column;gap:8px;padding:14px"><h2 style="margin:0;font-size:17px">Локальный журнал</h2><div style="display:flex;gap:6px"><button type="button" onClick="{{ showAll }}" aria-pressed="{{ allOn }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Все</button><button type="button" onClick="{{ showRefused }}" aria-pressed="{{ refusedOn }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Отказы</button></div></div><ol style="list-style:none;margin:0;padding:0 14px 14px;display:flex;flex-direction:column;gap:7px;overflow:auto;flex:1;min-height:0"><sc-for list="{{ rows }}" as="r" hint-placeholder-count="3"><li style="display:flex;gap:10px;padding:9px 10px;border:1px solid #e5ecf3;border-radius:10px;background:{{ r.bg }}"><img src="{{ r.photo }}" alt="" style="width:36px;height:36px;border-radius:8px;object-fit:cover"><div style="display:flex;flex-direction:column;gap:3px;font-size:12px"><strong style="font-size:13px">{{ r.name }}</strong><span style="color:#566a8b">{{ r.meta }}</span><span>{{ r.status }}</span><span style="color:#005f85;font-weight:600">{{ r.sync }}</span></div></li></sc-for></ol></aside></div></sc-if><sc-if value="{{ onManual }}" hint-placeholder-val="{{ false }}"><div style="background:#ffffff;border:1px solid #e1e9f2;border-radius:13px;padding:20px;flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;gap:12px;"><h1 style="margin:0;font-size:24px;font-weight:650;line-height:1.25">Ручная операция</h1><div style="margin-left:auto"><button type="button" onClick="{{ closeManual }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Закрыть</button></div></div><sc-if value="{{ m1 }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:12px;"><h2 style="margin:0;font-size:18px;font-weight:650;line-height:1.25">1 · Выберите сотрудника</h2><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px"><sc-for list="{{ mPeople }}" as="o" hint-placeholder-count="4"><button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="min-height:52px;padding:8px 14px;border-radius:10px;border:2px solid {{ o.border }};background:{{ o.bg }};color:#131c2e;font:600 14px Inter,sans-serif;text-align:left">{{ o.label }}</button></sc-for></div><button type="button" onClick="{{ toM2 }}" disabled="{{ noPerson }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;background:#007fb0;border-color:#007fb0;color:#ffffff;align-self:flex-end;min-width:180px">Далее</button></div></sc-if><sc-if value="{{ m2 }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:12px;"><h2 style="margin:0;font-size:18px;font-weight:650;line-height:1.25">2 · Вид питания</h2><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px"><sc-for list="{{ mMeals }}" as="o" hint-placeholder-count="4"><button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="min-height:52px;padding:8px 14px;border-radius:10px;border:2px solid {{ o.border }};background:{{ o.bg }};color:#131c2e;font:600 14px Inter,sans-serif;text-align:left">{{ o.label }}</button></sc-for></div><h2 style="margin:0;font-size:18px;font-weight:650;line-height:1.25">Основание · обязательно</h2><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px"><sc-for list="{{ mReasons }}" as="o" hint-placeholder-count="4"><button type="button" onClick="{{ o.pick }}" aria-pressed="{{ o.on }}" style="min-height:52px;padding:8px 14px;border-radius:10px;border:2px solid {{ o.border }};background:{{ o.bg }};color:#131c2e;font:600 14px Inter,sans-serif;text-align:left">{{ o.label }}</button></sc-for></div><div style="display:flex;align-items:center;gap:10px;justify-content:flex-end"><button type="button" onClick="{{ openManualBack }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Назад</button><button type="button" onClick="{{ toM3 }}" disabled="{{ noReason }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;background:#007fb0;border-color:#007fb0;color:#ffffff;min-width:180px">Далее</button></div></div></sc-if><sc-if value="{{ m3 }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:14px;"><h2 style="margin:0;font-size:18px;font-weight:650;line-height:1.25">3 · Подтвердите</h2><p style="margin:0;font-size:18px;line-height:1.6">{{ mSummary }}</p><p style="margin:0;font-size:14px;color:#566a8b">Оператор: Демо-оператор. Проверьте личность сотрудника перед подтверждением.</p><div style="display:flex;align-items:center;gap:10px;justify-content:flex-end"><button type="button" onClick="{{ toM2 }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Назад</button><button type="button" onClick="{{ confirmManual }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;background:#007fb0;border-color:#007fb0;color:#ffffff">Подтвердить выдачу</button></div></div></sc-if><sc-if value="{{ m4 }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:14px;"><div role="status" style="padding:18px;border-radius:12px;background:{{ mDoneBg }};font-size:18px;line-height:1.5">{{ mDone }}</div><button type="button" onClick="{{ closeManual }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;background:#007fb0;border-color:#007fb0;color:#ffffff;align-self:flex-end;min-width:180px">Готово</button></div></sc-if></div></sc-if></div><div style="box-sizing:border-box;width:1280px;height:220px;padding:14px 16px;background:#ffffff;border-top:2px dashed #7f93ad;display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;gap:10px;"><span style="font-size:13px;font-weight:700">Демо-пульт · не часть экрана оператора</span><span role="status" style="margin-left:auto;font-size:13px;font-weight:600">{{ counters }}</span></div><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font-size:12px">Терминал</span><button type="button" onClick="{{ useT1 }}" aria-pressed="{{ isT1 }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Т1</button><button type="button" onClick="{{ useT2 }}" aria-pressed="{{ isT2 }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Т2</button><span style="font-size:13px;font-weight:700">Выбран {{ station }}</span><span style="font-size:12px;margin-left:10px">Подходит:</span><sc-for list="{{ walkers }}" as="w" hint-placeholder-count="6"><button type="button" onClick="{{ w.pick }}" aria-label="{{ w.label }}" style="width:48px;height:48px;padding:0;border:1px solid #c9d5e5;border-radius:10px;background:#ffffff;overflow:hidden"><img src="{{ w.photo }}" alt="" style="width:100%;height:100%;object-fit:cover"></button></sc-for><button type="button" onClick="{{ unknown }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Неизвестное лицо</button></div><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><button type="button" onClick="{{ day }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Время 13:10</button><button type="button" onClick="{{ night }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Время 23:30</button><button type="button" onClick="{{ lan }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;margin-left:14px">LAN</button><button type="button" onClick="{{ sim }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Только SIM</button><button type="button" onClick="{{ offline }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Нет связи</button><button type="button" onClick="{{ redeliver }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;margin-left:14px">Повторить доставку</button><button type="button" onClick="{{ reset }}" style="min-height:44px;padding:0 14px;border-radius:9px;border:1px solid #c9d5e5;background:#ffffff;color:#131c2e;font:600 13px Inter,sans-serif;">Начать заново</button></div><span role="status" style="font-size:13px;color:#43557a">{{ log }}</span></div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1020}}'>
+class Component extends DCLogic {
+constructor(props) { super(props); this.timers = {}; this.d = this.initial(); this.state = { tick: 0 }; this.tick = 0; }
+// Данные прототипа хранятся в this.d и меняются сразу; setState только перерисовывает экран
+set(patch) { const next = typeof patch === 'function' ? patch(this.d) : patch; this.d = { ...this.d, ...next }; this.tick += 1; this.setState({ tick: this.tick }); }
+initial() {
+  const seed = (id, p, meal, time) => ({ id, p, meal, time, ok: true, reason: '', src: 'Т1', sync: 'sent' });
+  const records = [seed('seed-3', 4, 'Вода', '12:27'), seed('seed-2', 1, 'Обед', '12:18'), seed('seed-1', 0, 'Завтрак', '06:40')];
+  records[0].src = 'Т2';
+  return { time: '13:10', link: 'lan', station: 'a', a: null, b: null, extra: '', filter: 'all', records, center: records.map(r => r.id), next: 1, manual: 0, mp: -1, mm: 'Обед', mr: '', mDone: '', mOk: true, log: 'Начните: выберите сотрудника в демо-пульте.' };
+}
+componentWillUnmount() { this.stop(); }
+stop() { Object.values(this.timers).forEach(clearTimeout); this.timers = {}; }
+later(key, ms, fn) { clearTimeout(this.timers[key]); this.timers[key] = setTimeout(fn, ms); }
+mainMeal() { return this.d.time === '13:10' ? 'Обед' : ''; }
+refusal(p, meal) {
+  if (!meal) return 'Вне времени основного приёма';
+  const shared = ['Обед', 'Сухой паёк'];
+  const used = this.d.records.find(r => r.ok && r.p === p && (r.meal === meal || (shared.includes(r.meal) && shared.includes(meal))));
+  return used ? 'Лимит питания уже использован' : '';
+}
+add(p, meal, reason, src) {
+  const id = 'op-' + this.d.next;
+  const record = { id, p, meal: meal || 'Вне окна', time: this.d.time, ok: !reason, reason, src, sync: 'pending' };
+  this.set(s => ({ records: [record, ...s.records], next: s.next + 1 }));
+  this.flush();
+}
+flush() {
+  if (this.d.link === 'off' || !this.d.records.some(r => r.sync !== 'sent')) return;
+  this.set(s => ({ records: s.records.map(r => r.sync === 'pending' ? { ...r, sync: 'sending' } : r) }));
+  this.later('send', 1400, () => {
+    if (this.d.link === 'off') return;
+    this.set(s => {
+      const center = [...s.center];
+      s.records.forEach(r => { if (r.sync === 'sending' && !center.includes(r.id)) center.push(r.id); });
+      return { center, records: s.records.map(r => r.sync === 'sending' ? { ...r, sync: 'sent' } : r), log: 'Центр подтвердил приём.' };
+    });
+  });
+}
+setLink(link) {
+  if (link === 'off') {
+    clearTimeout(this.timers.send);
+    this.set(s => ({ link, records: s.records.map(r => r.sync === 'sending' ? { ...r, sync: 'pending' } : r), log: 'Оба канала отключены.' }));
+  } else {
+    this.set({ link, log: link === 'sim' ? 'LAN недоступен, доступен резервный SIM.' : 'LAN доступен.' });
+    this.flush();
+  }
+}
+walk(p) {
+  const k = this.d.station;
+  if (this.d.manual) return;
+  if (this.d[k] && this.d[k].pending) return;
+  const meal = k === 'a' ? this.mainMeal() : this.d.extra;
+  if (k === 'b' && !meal) { this.set({ log: 'Сначала выберите позицию на Т2.' }); return; }
+  this.set({ [k]: { pending: true, p } });
+  this.later(k, 900, () => {
+    const reason = this.refusal(p, meal);
+    this.add(p, meal, reason, k === 'a' ? 'Т1' : 'Т2');
+    this.set(s => ({ [k]: { p, meal, reason }, extra: k === 'b' && !reason ? '' : s.extra }));
+    this.later(k, 8000, () => this.set({ [k]: null }));
+  });
+}
+unknown() {
+  const k = this.d.station;
+  if (this.d.manual || (this.d[k] && this.d[k].pending)) return;
+  this.set({ [k]: { p: -1, reason: 'Сотрудник не найден' } });
+  this.later(k, 8000, () => this.set({ [k]: null }));
+}
+confirmManual() {
+  const { mp, mm, mr } = this.d;
+  const reason = this.refusal(mp, mm);
+  const offline = this.d.link === 'off';
+  this.add(mp, mm, reason, 'Вручную · ' + mr);
+  this.set({ manual: 4, mOk: !reason, mDone: reason ? 'Отказано: ' + reason + '. Ручная операция не обходит лимит.' : 'Выдано вручную: ' + mm + '. ' + (offline ? 'Запись сохранена на точке и ожидает отправки.' : 'Запись сохранена и отправляется в центр.') });
+}
+view(k) {
+  const photos = ["./assets/2a248bc2b87f655650ffebcf78e61bb8.jpg", "./assets/0e3abdb27862333ec4b1d4237e3f5807.jpg", "./assets/a8b5ebd85ff318dec0b3fef52ccc2b88.jpg", "./assets/298c5d024145e632e2b8a41d4c610343.jpg", "./assets/b2e9bbdbe6594a06929f04cad8ebb09e.jpg", "./assets/61bd32cf498ae422c63a1c93cb7dd697.jpg"], names = ["Арман Алиев", "Виктор Сергеев", "Данияр Жумабеков", "Елена Кузнецова", "Бахтияр Нурланов", "Андрей Иванов"], s = this.d, v = s[k];
+  if (!v) {
+    const sel = k === 'a' ? this.mainMeal() : s.extra;
+    return { idle: true, pending: false, done: false, title: k === 'a' ? (sel ? 'Подойдите к терминалу Т1' : 'Основной приём не идёт') : (sel ? 'Подойдите к терминалу Т2' : 'Выберите позицию'), text: k === 'a' ? (sel ? 'Обед фиксируется автоматически' : 'Дополнительное питание — на Т2') : (sel ? 'Выбрано: ' + sel : 'После выдачи выбор сбросится') };
+  }
+  if (v.pending) return { idle: false, pending: true, done: false, photo: photos[v.p] };
+  const ok = !v.reason, local = ok && s.link === 'off';
+  return { idle: false, pending: false, done: true, known: v.p >= 0, unknown: v.p < 0, photo: v.p < 0 ? photos[0] : photos[v.p], name: v.p < 0 ? 'Сотрудник не определён' : names[v.p], ring: ok ? (local ? '#007fb0' : '#12a86b') : '#d49a12', bg: ok ? (local ? '#e7f6fe' : '#e4f8ee') : '#fff3cf', title: ok ? 'Выдано: ' + v.meal : v.reason, text: ok ? (local ? 'Сохранено на точке, ожидает отправки.' : 'Выдача записана в журнал.') : (v.p < 0 ? 'Выдача не зарегистрирована.' : 'Отказ записан в журнал.') };
+}
+renderVals() {
+  const photos = ["./assets/2a248bc2b87f655650ffebcf78e61bb8.jpg", "./assets/0e3abdb27862333ec4b1d4237e3f5807.jpg", "./assets/a8b5ebd85ff318dec0b3fef52ccc2b88.jpg", "./assets/298c5d024145e632e2b8a41d4c610343.jpg", "./assets/b2e9bbdbe6594a06929f04cad8ebb09e.jpg", "./assets/61bd32cf498ae422c63a1c93cb7dd697.jpg"], names = ["Арман Алиев", "Виктор Сергеев", "Данияр Жумабеков", "Елена Кузнецова", "Бахтияр Нурланов", "Андрей Иванов"], s = this.d;
+  const waiting = s.records.filter(r => r.sync !== 'sent').length;
+  const sending = s.records.some(r => r.sync === 'sending');
+  const choice = (list, current, key) => list.map(x => ({ label: x.label, on: x.id === current, border: x.id === current ? '#007fb0' : '#dbe5ef', bg: x.id === current ? '#e7f6fe' : '#ffffff', pick: () => this.set({ [key]: x.id }) }));
+  const plain = list => list.map(x => ({ id: x, label: x }));
+  return {
+    clock: s.time,
+    linkText: { lan: 'Связь: LAN', sim: 'Резервный канал SIM', off: 'Нет LAN и SIM' }[s.link],
+    linkBg: { lan: '#ffffff', sim: '#fff3cf', off: '#fde8e6' }[s.link],
+    syncText: sending ? 'Отправляется…' : waiting ? 'Ожидают отправки: ' + waiting : 'Все записи отправлены',
+    banner: s.link === 'off' ? 'Нет связи с центром. Записи сохраняются на точке.' : '',
+    slotText: this.mainMeal() ? 'Обед · 12:00 – 15:00 · сейчас' : 'Вне основного приёма',
+    slotBg: this.mainMeal() ? '#e4f5ff' : '#fff3cf',
+    a: this.view('a'), b: this.view('b'),
+    extras: ['Ночное питание', 'Вода', 'Сухой паёк'].map(label => ({ label, on: s.extra === label, bg: s.extra === label ? '#1d3a5c' : '#ffffff', fg: s.extra === label ? '#ffffff' : '#131c2e', pick: () => { if (s.b && s.b.pending) return; clearTimeout(this.timers.b); this.set({ extra: s.extra === label ? '' : label, b: null, station: 'b' }); } })),
+    rows: s.records.filter(r => s.filter === 'all' || !r.ok).map(r => ({ photo: photos[r.p], name: names[r.p], meta: r.time + ' · ' + r.src + ' · ' + r.meal, status: r.ok ? 'Выдано' : 'Отказ: ' + r.reason, sync: { sent: 'Отправлено', sending: 'Отправляется', pending: 'Ожидает отправки' }[r.sync], bg: r.ok ? '#ffffff' : '#fffaec' })),
+    allOn: s.filter === 'all', refusedOn: s.filter === 'no',
+    showAll: () => this.set({ filter: 'all' }), showRefused: () => this.set({ filter: 'no' }),
+    counters: 'На точке: ' + s.records.length + ' · в центре: ' + s.center.length + ' · ожидают: ' + waiting,
+    log: s.log,
+    isT1: s.station === 'a', isT2: s.station === 'b', station: s.station === 'a' ? 'Т1' : 'Т2',
+    useT1: () => this.set({ station: 'a' }), useT2: () => this.set({ station: 'b' }),
+    walkers: names.map((n, i) => ({ photo: photos[i], label: 'Подходит: ' + n, pick: () => this.walk(i) })),
+    unknown: () => this.unknown(),
+    day: () => { clearTimeout(this.timers.a); this.set({ time: '13:10', a: null }); },
+    night: () => { clearTimeout(this.timers.a); this.set({ time: '23:30', a: null }); },
+    lan: () => this.setLink('lan'), sim: () => this.setLink('sim'), offline: () => this.setLink('off'),
+    redeliver: () => {
+      if (s.link === 'off') { this.set({ log: 'Нет связи: повторить доставку нельзя.' }); return; }
+      if (waiting) { this.set({ log: 'Дождитесь окончания отправки.' }); return; }
+      const added = s.records.filter(r => !s.center.includes(r.id)).length;
+      this.set({ log: 'Повторно отправлено записей: ' + s.records.length + '. Новых в центре: ' + added + '. Всего в центре: ' + (s.center.length + added) + '.' });
+    },
+    reset: () => { this.stop(); this.set(this.initial()); },
+    onOps: !s.manual, onManual: s.manual > 0, m1: s.manual === 1, m2: s.manual === 2, m3: s.manual === 3, m4: s.manual === 4,
+    openManual: () => { if ((s.a && s.a.pending) || (s.b && s.b.pending)) return; this.set({ manual: 1, mp: -1, mm: 'Обед', mr: '' }); },
+    openManualBack: () => this.set({ manual: 1 }),
+    closeManual: () => this.set({ manual: 0 }),
+    toM2: () => this.set({ manual: 2 }), toM3: () => this.set({ manual: 3 }),
+    noPerson: s.mp < 0, noReason: !s.mr,
+    mPeople: choice(names.map((label, id) => ({ id, label })), s.mp, 'mp'),
+    mMeals: choice(plain(['Обед', 'Ночное питание', 'Вода', 'Сухой паёк']), s.mm, 'mm'),
+    mReasons: choice(plain(['Не распознано лицо', 'Терминал не работает', 'Другая причина']), s.mr, 'mr'),
+    mSummary: (s.mp < 0 ? '' : names[s.mp]) + ' · ' + s.mm + ' · основание: ' + s.mr,
+    confirmManual: () => this.confirmManual(),
+    mDone: s.mDone, mDoneBg: s.mOk ? '#e4f8ee' : '#fff3cf'
+  };
+}
+
+}
+</script>
+</body>
+</html>
